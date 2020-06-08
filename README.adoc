@@ -1,0 +1,66 @@
+= Java Test Best Practices and Tools Workshop
+
+This is a demonstration of multiple best practices, frameworks, libs and tools for testing Java applications. Although some features are only available in Spring applications, some should generally be applicable for Java code.
+
+This workshop is not intended for test-driven development (TDD), but for testing existing code.
+
+To have a codebase to write tests for, this repository contains a partial copy of the backend code of https://www.ithubbs.de[the IT Hub Brunswick].
+
+== Suggested workshop walkthrough
+
+. Disclaimer: This is not about TDD, but for writing tests for an existing codebase!
+. (optional) Demonstrate use-case by showing IT Hub with admin UI.
+. Show overall architecture via short code review.
+.. Main take-away: Controller -> Services -> Repositories.
+.. Background: Single Responsibility Principle.
+.. Slicing by business functionality, not technical aspects.
+. *Method*: Develop a test-architecture: how to test different parts of the codebase?
+.. Controllers: test separately as unit tests because of clear and isolated task: "do HTTP"
+.. Services: Most important task: business functionality. In this application highly coupled with repository-layer. Solution: Test services and repositories together as integration tests.
+. Decision: Start testing Controllers, example class for this workshop is AdminEventController
+. *Method*: Outline test-cases: Before writing code, just think about what you want to test and write it as a comment. -> Question for listeners: How many tests do you see for this controller?
+. Naive approach: just call methods in Controllers -> AdminEventControllerTest_01_methodCalls.java, learning a new method:
+. *Method*: Use descriptive method names.
+.. long, but give information needed
+.. think about when to read this: when test fails and nobody knows the implementation anymore
+.. alternative: JUnit 5 display names
+. Just write the one test for getting all events to save time. During this example, learn new tool:
+. *Tool*: Mockito
+. Look at written test: Does this really test what the application is doing? No!
+.. Application delivers json, test is not testing this.
+.. Application has security features: accessing the method without token not allowed!
+.. Hence: Re-write test using Spring MVC Test -> AdminEventControllerTest_02_springmvctest.java, learn new tools:
+. *Tool*: Spring MVC Test
+. *Tool*: https://stevenschwenke.de/springTestSlices[Spring Testslices]
+. Re-write test gettingAllEventsViaAdminEndpointWillReturnEventsAndHTTP200 as shown in AdminEventControllerTest_02_springmvctest.java
+. *Tool*: Shortcuts for writing tests (IntelliJ IDEA):
+.. Ctrl + Shift + T to switch between implementing class and test class
+.. Alt + Insert to generate test methods
+.. Ctrl + Shift + F10 to run what is under carret: in method -> run method, between two methods -> run whole test class
+.. Ctrl + F5 to rerun
+. Switch to next layer: services! Write service-test while mocking repos, see AdminEventServiceImplTest_01_mockRepo.java
+.. Validation-annotations in bean are not tested!
+. Write service/repo-tests, example AdminEventServiceImplTest.java
+. *Method*: Accelerate tests using in-memory databases using Spring Profiles
+.. see DatabaseConfigJUnit.java
+. *Tool*: Check test coverage with IntelliJ IDEA
+
+[ ] ArchUnit zeigen für fachliches Slizzing
+
+[ ] zusätzlich Testcontainer statt in-memory-H2 demonstrieren
+
+== Summary
+
+Methods:
+
+- Develop a test-architecture.
+- Outline test-cases.
+- Use descriptive method names.
+- Use your IDE's shortcuts and abilities to enhance your tests.
+- Accelerate your tests using in-memory databases.
+
+Tools:
+
+- Mockito
+- Spring MVC Test
+- https://stevenschwenke.de/springTestSlices[Spring Testslices]
