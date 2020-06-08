@@ -45,8 +45,7 @@ To have a codebase to write tests for, this repository contains a partial copy o
 .. see DatabaseConfigJUnit.java
 . *Tool*: Check test coverage with IntelliJ IDEA
 . *Tool*: (partial test) ArchUnit in ArchitectureRulesTest.java
-
-[ ] zusätzlich Testcontainer statt in-memory-H2 demonstrieren
+. *Tool*: Java Testcontainers
 
 == Summary
 
@@ -63,3 +62,5 @@ Tools:
 - Mockito
 - Spring MVC Test
 - https://stevenschwenke.de/springTestSlices[Spring Testslices]
+- ArchUnit
+- Java Test Containers
