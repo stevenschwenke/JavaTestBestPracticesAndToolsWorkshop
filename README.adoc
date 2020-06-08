@@ -44,8 +44,7 @@ To have a codebase to write tests for, this repository contains a partial copy o
 . *Method*: Accelerate tests using in-memory databases using Spring Profiles
 .. see DatabaseConfigJUnit.java
 . *Tool*: Check test coverage with IntelliJ IDEA
-
-[ ] ArchUnit zeigen für fachliches Slizzing
+. *Tool*: (partial test) ArchUnit in ArchitectureRulesTest.java
 
 [ ] zusätzlich Testcontainer statt in-memory-H2 demonstrieren
 
